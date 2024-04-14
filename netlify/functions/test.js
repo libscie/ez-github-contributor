@@ -6,7 +6,11 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY; // Your GitHub App's private key
 const INSTALLATION_ID = process.env.INSTALLATION_ID; // Installation ID for the repository
 
 const app = new App({ id: APP_ID, privateKey: PRIVATE_KEY });
-const octokit = new Octokit();
+const octokit = new Octokit({auth: {
+    appId: APP_ID,
+    privateKey: PRIVATE_KEY,
+    installationId: INSTALLATION_ID,
+  },});
 
 async function createPullRequest(owner, repo, title, head, base, body) {
     const installationAccessToken = await app.getInstallationAccessToken({ installationId: INSTALLATION_ID });
