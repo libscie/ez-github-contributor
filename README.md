@@ -21,4 +21,4 @@ Here I am storing some resources I might need/want later:
 - https://probot.github.io/docs/hello-world/
 - https://github.com/probot/example-netlify-functions
 - https://www.ravsam.in/blog/deploy-a-serverless-probot-github-app-on-netlify-functions/#deploying-on-netlify-functions
-- 
+- github installation id is found under https://github.com/organizations/libscie/settings/installations/ - click on relevant app and look at the number at the end of the url

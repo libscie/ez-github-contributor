@@ -1,4 +1,3 @@
-// netlify/functions/postHandler.js
 exports.handler = async function(event, context) {
     if (event.httpMethod !== 'POST') {
       return {
