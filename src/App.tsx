@@ -1,11 +1,11 @@
 import TabGroup from './TabGroup'
-import { classNames } from './utils'
+// import { classNames } from './utils'
 
 import './App.css'
-import { useEffect, useState } from 'react'
+// import { useEffect, useState } from 'react'
 
 function App() {
-  const [data, setData] = useState<any[]>([])
+  // const [data, setData] = useState<any[]>([])
 
   // useEffect(() => {
   //   fetch('/.netlify/functions/retrieve-installed-apps')
@@ -25,9 +25,9 @@ function App() {
         <h2>Where would you like to contribute?</h2>
         <div>
           <ul className="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
-            {!!data
-              ? data.map((project) => (
-                  <li
+            {/* {!!data
+             ? data.map((project) => ( 
+            <li
                     key={project.repo}
                     className="col-span-1 flex rounded-md shadow-sm"
                   >
@@ -47,12 +47,11 @@ function App() {
                         >
                           {project.repo}
                         </a>
-                        {/* <p className="text-gray-500">{project.description}</p> */}
                       </div>
                     </div>
                   </li>
-                ))
-              : ''}
+            ))
+            : ''} */}
           </ul>
         </div>
       </div>
