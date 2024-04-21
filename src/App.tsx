@@ -1,4 +1,5 @@
-import Editor from './Editor'
+import TabGroup from './TabGroup'
+
 import './App.css'
 
 function App() {
@@ -7,7 +8,7 @@ function App() {
       <header className="App-header">
         <h1>Easy GitHub Contributor</h1>
       </header>
-      <Editor />
+      <TabGroup />
     </div>
   )
 }

@@ -43,15 +43,12 @@ exports.handler = async function (event, context) {
     'ez-github-contributor',
     params.title,
     `
-This issue is created using [Easy GitHub Contributor](https://ez-github-contributor.netlify.app/).
-
----
-
 ${params.body}
 
 ---
 
-${params.contact ? `Contact information: ${params.contact}` : ''}`
+This issue is created using [Easy GitHub Contributor](https://ez-github-contributor.netlify.app/).
+${params.contact ? `The author left their contact info for follow up: ${params.contact}` : 'The author did not leave their contact info.'}`
   )
 
   return {
