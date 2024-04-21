@@ -12,9 +12,13 @@ import { ListNode, ListItemNode } from '@lexical/list';
 import { HeadingNode, QuoteNode } from '@lexical/rich-text';
 import { HorizontalRuleNode } from '@lexical/react/LexicalHorizontalRuleNode';
 
+import {
+  $convertToMarkdownString,
+  TRANSFORMERS,
+} from '@lexical/markdown';
+
 import ExampleTheme from './ExampleTheme';
 import ToolbarPlugin from './plugins/ToolbarPlugin';
-import TreeViewPlugin from './plugins/TreeViewPlugin';
 
 function Placeholder() {
   return <div className="editor-placeholder">Enter some rich text...</div>;
@@ -39,6 +43,14 @@ const editorConfig = {
     theme: ExampleTheme,
   };
   
+
+const onChange = (editorState: any) => {
+    editorState.read(() => {
+        const markdown = $convertToMarkdownString(TRANSFORMERS);
+        console.log(markdown);
+    });
+}
+
 function Editor() {
   
   return (
@@ -53,9 +65,8 @@ function Editor() {
         />
         <HistoryPlugin />
         <AutoFocusPlugin />
-        <TreeViewPlugin />
-        <MarkdownShortcutPlugin />
-        <OnChangePlugin onChange={editorState => console.log(JSON.stringify(editorState))} />
+        <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
+        <OnChangePlugin onChange={onChange} />
       </div>
     </div>
   </LexicalComposer>
