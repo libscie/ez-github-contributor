@@ -1,41 +1,53 @@
-import {$getRoot, $getSelection} from 'lexical';
-import {useEffect} from 'react';
-
+/**
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
 import {AutoFocusPlugin} from '@lexical/react/LexicalAutoFocusPlugin';
 import {LexicalComposer} from '@lexical/react/LexicalComposer';
-import {RichTextPlugin} from '@lexical/react/LexicalRichTextPlugin';
 import {ContentEditable} from '@lexical/react/LexicalContentEditable';
-import {HistoryPlugin} from '@lexical/react/LexicalHistoryPlugin';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
+import {HistoryPlugin} from '@lexical/react/LexicalHistoryPlugin';
+import {RichTextPlugin} from '@lexical/react/LexicalRichTextPlugin';
 
-const theme = {
-  // Theme styling goes here
+import ExampleTheme from './ExampleTheme';
+import ToolbarPlugin from './plugins/ToolbarPlugin';
+import TreeViewPlugin from './plugins/TreeViewPlugin';
+
+function Placeholder() {
+  return <div className="editor-placeholder">Enter some rich text...</div>;
 }
 
-// Catch any errors that occur during Lexical updates and log them
-// or throw them as needed. If you don't throw them, Lexical will
-// try to recover gracefully without losing user data.
-function onError(error: Error) {
-  console.error(error);
-}
-
-function Editor() {
-  const initialConfig = {
-    namespace: 'MyEditor',
-    theme,
-    onError,
+const editorConfig = {
+    namespace: 'React.js Demo',
+    nodes: [],
+    // Handling of errors during update
+    onError(error: Error) {
+      throw error;
+    },
+    // The editor theme
+    theme: ExampleTheme,
   };
-
+  
+function Editor() {
   return (
-    <LexicalComposer initialConfig={initialConfig}>
-      <RichTextPlugin
-        contentEditable={<ContentEditable />}
-        placeholder={<div>Enter some text...</div>}
-        ErrorBoundary={LexicalErrorBoundary}
-      />
-      <HistoryPlugin />
-      <AutoFocusPlugin />
-    </LexicalComposer>
+    <LexicalComposer initialConfig={editorConfig}>
+    <div className="editor-container">
+      <ToolbarPlugin />
+      <div className="editor-inner">
+        <RichTextPlugin
+          contentEditable={<ContentEditable className="editor-input" />}
+          placeholder={<Placeholder />}
+          ErrorBoundary={LexicalErrorBoundary}
+        />
+        <HistoryPlugin />
+        <AutoFocusPlugin />
+        <TreeViewPlugin />
+      </div>
+    </div>
+  </LexicalComposer>
   );
 }
 
