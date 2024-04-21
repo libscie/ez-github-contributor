@@ -7,14 +7,14 @@ import { useEffect, useState } from 'react'
 function App() {
   const [data, setData] = useState<any[]>([])
 
-  useEffect(() => {
-    fetch('/.netlify/functions/retrieve-installed-apps')
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data)
-        setData(data)
-      })
-  }, [])
+  // useEffect(() => {
+  //   fetch('/.netlify/functions/retrieve-installed-apps')
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log(data)
+  //       setData(data)
+  //     })
+  // }, [])
 
   return (
     <div className="App">
