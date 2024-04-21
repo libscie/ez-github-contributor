@@ -7,42 +7,55 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY // Your GitHub App's private key
 const INSTALLATION_ID = process.env.INSTALLATION_ID // Installation ID for the repository
 
 async function createIssue(owner, repo, title, body) {
-    const auth = createAppAuth({
-        appId: APP_ID,
-        privateKey: PRIVATE_KEY,
-        installationId: INSTALLATION_ID,
+  const auth = createAppAuth({
+    appId: APP_ID,
+    privateKey: PRIVATE_KEY,
+    installationId: INSTALLATION_ID,
+  })
+
+  const installationAccessToken = await auth({ type: 'installation' })
+
+  const octokit = new Octokit({
+    auth: installationAccessToken.token,
+  })
+
+  try {
+    const { data } = await octokit.issues.create({
+      owner,
+      repo,
+      title,
+      body,
     })
-
-    const installationAccessToken = await auth({ type: 'installation' })
-
-    const octokit = new Octokit({
-        auth: installationAccessToken.token,
-    })
-
-    try {
-        const { data } = await octokit.issues.create({
-            owner,
-            repo,
-            title,
-            body,
-        })
-        console.log('Issue Created: ', data.html_url)
-    } catch (error) {
-        console.error('Error: ', error)
-    }
+    console.log('Issue Created: ', data.html_url)
+  } catch (error) {
+    console.error('Error: ', error)
+  }
 }
 
 exports.handler = async function (event, context) {
-    await createIssue(
-        'libscie',
-        'ez-github-contributor',
-        'Issue Title',
-        'Description of the issue'
-    )
-    // add 200 response
+  if (event.httpMethod !== 'POST') {
+    throw new Error('Invalid request method, expected POST')
+  }
 
-    return {
-        statusCode: '200',
-        body: 'Completed the request',
-    }
+  const params = JSON.parse(event.body)
+  await createIssue(
+    'libscie',
+    'ez-github-contributor',
+    params.title,
+    `
+This issue is created using [Easy GitHub Contributor](https://ez-github-contributor.netlify.app/).
+
+---
+
+${params.body}
+
+---
+
+${params.contact ? `Contact information: ${params.contact}` : ''}`
+  )
+
+  return {
+    statusCode: '200',
+    body: 'Completed the request',
+  }
 }

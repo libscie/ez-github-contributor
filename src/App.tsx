@@ -1,5 +1,4 @@
 import Editor from './Editor'
-
 import './App.css'
 
 function App() {
