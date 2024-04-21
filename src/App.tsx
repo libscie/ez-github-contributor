@@ -1,6 +1,6 @@
-import Editor from './Editor';
+import Editor from './Editor'
 
-import './App.css';
+import './App.css'
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       </header>
       <Editor />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

@@ -10,11 +10,14 @@
 @tailwind components;
 @tailwind utilities;
 
-
- body {
+body {
   margin: 0;
   background: #eee;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular',
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    '.SFNSText-Regular',
     sans-serif;
   font-weight: 500;
   -webkit-font-smoothing: antialiased;
