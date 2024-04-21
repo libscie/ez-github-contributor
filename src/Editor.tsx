@@ -1,10 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
 import {AutoFocusPlugin} from '@lexical/react/LexicalAutoFocusPlugin';
 import {LexicalComposer} from '@lexical/react/LexicalComposer';
 import {ContentEditable} from '@lexical/react/LexicalContentEditable';
@@ -12,6 +5,12 @@ import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import {HistoryPlugin} from '@lexical/react/LexicalHistoryPlugin';
 import {RichTextPlugin} from '@lexical/react/LexicalRichTextPlugin';
 import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin'
+import { MarkdownShortcutPlugin } from '@lexical/react/LexicalMarkdownShortcutPlugin'
+import { CodeNode } from '@lexical/code';
+import { LinkNode } from '@lexical/link';
+import { ListNode, ListItemNode } from '@lexical/list';
+import { HeadingNode, QuoteNode } from '@lexical/rich-text';
+import { HorizontalRuleNode } from '@lexical/react/LexicalHorizontalRuleNode';
 
 import ExampleTheme from './ExampleTheme';
 import ToolbarPlugin from './plugins/ToolbarPlugin';
@@ -23,7 +22,15 @@ function Placeholder() {
 
 const editorConfig = {
     namespace: 'Easy GitHub Contributor',
-    nodes: [],
+    nodes: [
+      HorizontalRuleNode,
+      CodeNode,
+      LinkNode,
+      ListNode,
+      ListItemNode,
+      HeadingNode,
+      QuoteNode,
+    ],
     // Handling of errors during update
     onError(error: Error) {
       throw error;
@@ -33,6 +40,7 @@ const editorConfig = {
   };
   
 function Editor() {
+  
   return (
     <LexicalComposer initialConfig={editorConfig}>
     <div className="editor-container">
@@ -46,7 +54,8 @@ function Editor() {
         <HistoryPlugin />
         <AutoFocusPlugin />
         <TreeViewPlugin />
-        <OnChangePlugin onChange={() => {console.log('yes')}} />
+        <MarkdownShortcutPlugin />
+        <OnChangePlugin onChange={editorState => console.log(JSON.stringify(editorState))} />
       </div>
     </div>
   </LexicalComposer>
