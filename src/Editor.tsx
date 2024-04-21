@@ -58,9 +58,9 @@ const editorConfig = {
     }
   
   return (
-    <>
+    <form>
       <label htmlFor="titleInput">Title</label>
-      <input id="titleInput" type="text" value={title} onChange={(event) => {setTitle(event.target.value)}} />
+      <input id="titleInput" type="text" value={title} onChange={(event) => {setTitle(event.target.value)}} required/>
     <LexicalComposer initialConfig={editorConfig}>
     <div className="editor-container">
       <ToolbarPlugin />
@@ -77,20 +77,22 @@ const editorConfig = {
       </div>
     </div>
     <label htmlFor="contactInput">Contact information</label>
-      <input id="contactInput" type="text" value={contact} onChange={(event) => {setContact(event.target.value)}} />
+    <p>For clarifications or follow up.</p>
+    <input id="contactInput" type="email" value={contact} onChange={(event) => {setContact(event.target.value)}} placeholder='email@example.com'/>
     <button
-        type="button"
+        type="submit"
         className="rounded bg-indigo-600 px-2 py-1 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         onClick={() => {
           alert(`${title}
           ${body}
           `)
         }}
+
         >
         Submit
       </button>
   </LexicalComposer>
-        </>
+        </form>
   );
 }
 
