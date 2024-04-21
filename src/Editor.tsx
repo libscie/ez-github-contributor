@@ -11,6 +11,7 @@ import {ContentEditable} from '@lexical/react/LexicalContentEditable';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import {HistoryPlugin} from '@lexical/react/LexicalHistoryPlugin';
 import {RichTextPlugin} from '@lexical/react/LexicalRichTextPlugin';
+import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin'
 
 import ExampleTheme from './ExampleTheme';
 import ToolbarPlugin from './plugins/ToolbarPlugin';
@@ -21,7 +22,7 @@ function Placeholder() {
 }
 
 const editorConfig = {
-    namespace: 'React.js Demo',
+    namespace: 'Easy GitHub Contributor',
     nodes: [],
     // Handling of errors during update
     onError(error: Error) {
@@ -45,6 +46,7 @@ function Editor() {
         <HistoryPlugin />
         <AutoFocusPlugin />
         <TreeViewPlugin />
+        <OnChangePlugin onChange={() => {console.log('yes')}} />
       </div>
     </div>
   </LexicalComposer>
