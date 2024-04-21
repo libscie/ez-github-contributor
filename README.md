@@ -18,10 +18,6 @@ We use Netlify so that we can also directly test our serverless functions.
 
 ---
 
-We asked ChatGPT what it associates with "ez-github-contributor" and it spit out an image of an owl. :owl: We'll take it!
-
-![](./public/owl-dall-e.webp)
-
 ## Resources
 
 Here I am storing some resources I might need/want later:
