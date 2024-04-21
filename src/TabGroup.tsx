@@ -3,11 +3,7 @@ import React, { useState } from 'react'
 import Editor from './Editor'
 import Modal from './Modal'
 import { Props } from './utils'
-import { SubmissionType } from './utils'
-
-function classNames(...classes: any[]) {
-  return classes.filter(Boolean).join(' ')
-}
+import { classNames, SubmissionType } from './utils'
 
 function Title({ value, setValue }: Props) {
   return (

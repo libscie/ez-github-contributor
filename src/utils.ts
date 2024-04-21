@@ -14,3 +14,7 @@ export interface Submission {
   contact?: String
   type: SubmissionType
 }
+
+export function classNames(...classes: any[]) {
+  return classes.filter(Boolean).join(' ')
+}
