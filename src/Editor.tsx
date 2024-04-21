@@ -69,6 +69,9 @@ function Editor() {
         <OnChangePlugin onChange={onChange} />
       </div>
     </div>
+    <button formMethod='POST' formTarget='/.netlify/functions/test'>
+      Submit
+    </button>
   </LexicalComposer>
   );
 }

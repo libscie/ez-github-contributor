@@ -128,6 +128,13 @@ async function createBranchIfNotExist(owner, repo, branch, base) {
 }
 
 exports.handler = async function(event, context) {
-    await createBranchIfNotExist('libscie', 'ez-github-contributor', 'test', 'main');
-    await createCommitAndPullRequest('libscie', 'ez-github-contributor', 'PR Title', 'test', 'main', 'Description of the PR', 'test.md', 'Commit message', 'testdfadsfsa');
+    console.log(event)
+    // await createBranchIfNotExist('libscie', 'ez-github-contributor', 'test', 'main');
+    // await createCommitAndPullRequest('libscie', 'ez-github-contributor', 'PR Title', 'test', 'main', 'Description of the PR', 'test.md', 'Commit message', 'testdfadsfsa');
+    // add 200 response
+
+    return {
+        statusCode: "200",
+        body: "Completed the request",
+    };
 }
