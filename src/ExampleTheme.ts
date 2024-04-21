@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     code: 'editor-code',
     heading: {
