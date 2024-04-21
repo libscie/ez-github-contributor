@@ -19,6 +19,7 @@ import {
 
 import ExampleTheme from './ExampleTheme';
 import ToolbarPlugin from './plugins/ToolbarPlugin';
+import { useState } from 'react';
 
 function Placeholder() {
   return <div className="editor-placeholder">Enter some rich text...</div>;
@@ -44,16 +45,22 @@ const editorConfig = {
   };
   
 
-const onChange = (editorState: any) => {
-    editorState.read(() => {
-        const markdown = $convertToMarkdownString(TRANSFORMERS);
-        console.log(markdown);
-    });
-}
-
-function Editor() {
+  
+  function Editor() {
+    const [title, setTitle] = useState("")
+    const [body, setBody] = useState("")
+    const [contact, setContact] = useState("")
+    const onChange = (editorState: any) => {
+        editorState.read(() => {
+            const markdown = $convertToMarkdownString(TRANSFORMERS);
+            setBody(markdown);
+        });
+    }
   
   return (
+    <>
+      <label htmlFor="titleInput">Title</label>
+      <input id="titleInput" type="text" value={title} onChange={(event) => {setTitle(event.target.value)}} />
     <LexicalComposer initialConfig={editorConfig}>
     <div className="editor-container">
       <ToolbarPlugin />
@@ -62,20 +69,28 @@ function Editor() {
           contentEditable={<ContentEditable className="editor-input" />}
           placeholder={<Placeholder />}
           ErrorBoundary={LexicalErrorBoundary}
-        />
+          />
         <HistoryPlugin />
         <AutoFocusPlugin />
         <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
         <OnChangePlugin onChange={onChange} />
       </div>
     </div>
+    <label htmlFor="contactInput">Contact information</label>
+      <input id="contactInput" type="text" value={contact} onChange={(event) => {setContact(event.target.value)}} />
     <button
         type="button"
         className="rounded bg-indigo-600 px-2 py-1 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-      >
+        onClick={() => {
+          alert(`${title}
+          ${body}
+          `)
+        }}
+        >
         Submit
       </button>
   </LexicalComposer>
+        </>
   );
 }
 
