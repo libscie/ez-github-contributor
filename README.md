@@ -1,5 +1,7 @@
 # ez-github-contributor
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/70e0b005-20ab-411d-93b1-d22b96498ac4/deploy-status)](https://app.netlify.com/sites/ez-github-contributor/deploys)
+
 This GitHub app makes it easier for people to contribute to open source, without having the need to understand either Markdown or GitHub. Except if we are already working with you on this, you will need to run your own version of the website **AND** [install the application](https://github.com/apps/easy-github-contributor).
 
 We are currently in active development. This involves building out the React website with a [Lexical editor](https://lexical.dev/docs/intro), and an integrated GitHub app that can be installed on relevant repositories.
