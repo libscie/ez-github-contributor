@@ -1,5 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useState } from 'react'
 import { Submission, SubmissionType } from './utils'
 import toast from 'react-hot-toast'
 
@@ -100,6 +100,7 @@ function Modal({ title, body, contact, type }: Submission) {
                                 <a
                                   href={res.html_url}
                                   target="_blank"
+                                  rel="noreferrer"
                                   className="underline"
                                 >
                                   View{' '}
