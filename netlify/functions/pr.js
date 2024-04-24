@@ -94,6 +94,8 @@ async function createCommitAndPullRequest(
       body,
     })
     console.log('Pull Request Created: ', data.html_url)
+
+    return data
   } catch (error) {
     console.error('Error: ', error)
   }
@@ -152,13 +154,15 @@ exports.handler = async function (event, context) {
     branch,
     'main'
   )
-  await createCommitAndPullRequest(
+  const res = await createCommitAndPullRequest(
     'libscie',
     'ez-github-contributor',
     params.title,
     branch,
     'main',
-    `Somebody submitted this content for consideration through the [Easy GitHub Contributor](https://ez-github-contributor.netlify.app/) web app. 
+    `New submission: "${params.title}" 
+    
+This submission was made for your consideration through the [Easy GitHub Contributor](https://ez-github-contributor.netlify.app/) web app. 
 
 ${params.contact ? `The author left their contact info for follow up: ${params.contact}` : 'The author did not leave their contact info.'}`,
     `${kebabcase(params.title)}.md`,
@@ -168,6 +172,9 @@ ${params.contact ? `The author left their contact info for follow up: ${params.c
 
   return {
     statusCode: '200',
-    body: 'Completed the request',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(res)
   }
 }

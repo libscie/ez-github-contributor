@@ -27,6 +27,7 @@ async function createIssue(owner, repo, title, body) {
       body,
     })
     console.log('Issue Created: ', data.html_url)
+    return data
   } catch (error) {
     console.error('Error: ', error)
   }
@@ -38,7 +39,7 @@ exports.handler = async function (event, context) {
   }
 
   const params = JSON.parse(event.body)
-  await createIssue(
+  const res = await createIssue(
     'libscie',
     'ez-github-contributor',
     params.title,
@@ -53,6 +54,9 @@ ${params.contact ? `The author left their contact info for follow up: ${params.c
 
   return {
     statusCode: '200',
-    body: 'Completed the request',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(res)
   }
 }
