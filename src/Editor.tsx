@@ -40,7 +40,7 @@ const editorConfig = {
   theme: ExampleTheme,
 }
 
-function Editor({ value, setValue }: Props) {
+function Editor({ setValue }: Props) {
   const onChange = (editorState: any) => {
     editorState.read(() => {
       const markdown = $convertToMarkdownString(TRANSFORMERS)
@@ -51,7 +51,7 @@ function Editor({ value, setValue }: Props) {
   return (
     <>
       <LexicalComposer initialConfig={editorConfig}>
-        <div className="editor-container">
+        <div className="editor-container border-radius-md">
           <ToolbarPlugin />
           <div className="editor-inner">
             <RichTextPlugin

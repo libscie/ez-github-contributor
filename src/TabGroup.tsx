@@ -8,34 +8,52 @@ import { classNames, SubmissionType } from './utils'
 function Title({ value, setValue }: Props) {
   return (
     <>
-      <label htmlFor="titleInput">Title</label>
-      <input
-        id="titleInput"
-        type="text"
-        placeholder={value}
-        onChange={(event) => {
-          setValue(event.target.value)
-        }}
-      />
+      <div className="flex justify-between mt-4">
+        <label htmlFor="title" className="block text-base font-medium leading-6 text-gray-900">
+          Title
+        </label>
+      </div>
+      <div className="mt-2">
+        <input
+          type="text"
+          name="title"
+          id="title"
+          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          placeholder={value}
+          onChange={(event) => {
+            setValue(event.target.value)
+          }}
+        />
+      </div>
     </>
   )
 }
 
-function Contact({ value, setValue }: Props) {
-  //   const [contact, setContact] = useState('')
+function Contact({ setValue }: Props) {
 
   return (
     <>
-      <label htmlFor="contactInput">Contact information</label>
-      <p>For clarifications or follow up.</p>
-      <input
-        id="contactInput"
-        type="email"
-        onChange={(event) => {
-          setValue(event.target.value)
-        }}
-        placeholder="email@example.com"
-      />
+      <div className="flex justify-between mt-4">
+        <label htmlFor="email" className="block text-base font-medium leading-6 text-gray-900">
+          Contact information
+        </label>
+        <span className="text-sm leading-6 text-gray-500" id="email-optional">
+          Optional
+        </span>
+      </div>
+      <div className="mt-2">
+        <input
+          type="email"
+          name="email"
+          id="email"
+          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          placeholder="Drop your name and email here for follow up - note these will be public on GitHub"
+          onChange={(event) => {
+            setValue(event.target.value)
+          }}
+          aria-describedby="email-optional"
+        />
+      </div>
     </>
   )
 }
@@ -47,40 +65,37 @@ function TabGroup() {
   const [tab, setTab] = useState(0)
 
   let [categories] = useState({
-    Issue: [
-      { component: Title, value: title, setValue: setTitle },
-      { component: Editor, value: body, setValue: setBody },
+    'Report problem': [
+      { component: Title, value: "Outdated links in the 'Getting Started' section", setValue: setTitle },
       { component: Contact, value: contact, setValue: setContact },
-      //   Editor,
-      //   Contact,
-      //   Modal,
+      { component: Editor, value: body, setValue: setBody },
     ],
-    'Pull Requests': [
-      { component: Title, value: title, setValue: setTitle },
-      { component: Editor, value: body, setValue: setBody },
+    'Propose new page': [
+      { component: Title, value: "Data Management Plan", setValue: setTitle },
       { component: Contact, value: contact, setValue: setContact },
+      { component: Editor, value: body, setValue: setBody },
     ],
   })
 
   return (
-    <div className="mx-auto w-full px-2 py-16 sm:px-0">
+    <div className="mx-auto w-full px-2 sm:px-0">
+      <h2 className='my-4 text-2xl'>What would you like to contribute?</h2>
       <Tab.Group
         onChange={(index) => {
           setTab(index)
-          //   console.log('Changed selected tab to:', index)
         }}
       >
-        <Tab.List className="flex space-x-1 rounded-xl bg-violet-900/20 p-1">
+        <Tab.List className="flex space-x-1 max-w-2xl mx-auto">
           {Object.keys(categories).map((category) => (
             <Tab
               key={category}
               className={({ selected }) =>
                 classNames(
-                  'w-full rounded-lg py-2.5 text-sm font-medium leading-5',
+                  'w-full rounded-lg py-2.5 text-base font-medium leading-5',
                   'ring-white/60 ring-offset-2 ring-offset-violet-400 focus:outline-none focus:ring-2',
                   selected
                     ? 'bg-white text-violet-700 shadow'
-                    : 'text-violet-100 hover:bg-white/[0.12] hover:text-white'
+                    : 'hover:bg-white/[0.50] hover:text-gray-800 '
                 )
               }
             >
@@ -88,13 +103,13 @@ function TabGroup() {
             </Tab>
           ))}
         </Tab.List>
-        <Tab.Panels className="mt-2">
+        <Tab.Panels className="my-4 max-w-2xl mx-auto">
           {Object.values(categories).map((posts, idx) => (
             <Tab.Panel
               key={idx}
               className={classNames(
-                'rounded-xl bg-white p-3',
-                'ring-white/60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2'
+                'rounded-xl',
+                'ring-white/60 ring-offset-2 '
               )}
             >
               {posts.map((post, idy) =>
