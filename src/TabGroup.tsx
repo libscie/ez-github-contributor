@@ -8,8 +8,11 @@ import { classNames, SubmissionType } from './utils'
 function Title({ value, setValue }: Props) {
   return (
     <>
-      <div className="flex justify-between mt-4">
-        <label htmlFor="title" className="block text-base font-medium leading-6 text-gray-900">
+      <div className="mt-4 flex justify-between">
+        <label
+          htmlFor="title"
+          className="block text-base font-medium leading-6 text-gray-900"
+        >
           Title
         </label>
       </div>
@@ -30,11 +33,13 @@ function Title({ value, setValue }: Props) {
 }
 
 function Contact({ setValue }: Props) {
-
   return (
     <>
-      <div className="flex justify-between mt-4">
-        <label htmlFor="email" className="block text-base font-medium leading-6 text-gray-900">
+      <div className="mt-4 flex justify-between">
+        <label
+          htmlFor="email"
+          className="block text-base font-medium leading-6 text-gray-900"
+        >
           Contact information
         </label>
         <span className="text-sm leading-6 text-gray-500" id="email-optional">
@@ -66,12 +71,16 @@ function TabGroup() {
 
   let [categories] = useState({
     'Report problem': [
-      { component: Title, value: "Outdated links in the 'Getting Started' section", setValue: setTitle },
+      {
+        component: Title,
+        value: "Outdated links in the 'Getting Started' section",
+        setValue: setTitle,
+      },
       { component: Contact, value: contact, setValue: setContact },
       { component: Editor, value: body, setValue: setBody },
     ],
     'Propose new page': [
-      { component: Title, value: "Data Management Plan", setValue: setTitle },
+      { component: Title, value: 'Data Management Plan', setValue: setTitle },
       { component: Contact, value: contact, setValue: setContact },
       { component: Editor, value: body, setValue: setBody },
     ],
@@ -79,13 +88,13 @@ function TabGroup() {
 
   return (
     <div className="mx-auto w-full px-2 sm:px-0">
-      <h2 className='my-4 text-2xl'>What would you like to contribute?</h2>
+      <h2 className="my-4 text-2xl">What would you like to contribute?</h2>
       <Tab.Group
         onChange={(index) => {
           setTab(index)
         }}
       >
-        <Tab.List className="flex space-x-1 max-w-2xl mx-auto">
+        <Tab.List className="mx-auto flex max-w-2xl space-x-1">
           {Object.keys(categories).map((category) => (
             <Tab
               key={category}
@@ -103,7 +112,7 @@ function TabGroup() {
             </Tab>
           ))}
         </Tab.List>
-        <Tab.Panels className="my-4 max-w-2xl mx-auto">
+        <Tab.Panels className="mx-auto my-4 max-w-2xl">
           {Object.values(categories).map((posts, idx) => (
             <Tab.Panel
               key={idx}
