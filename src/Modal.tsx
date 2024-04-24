@@ -1,6 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 import { Submission, SubmissionType } from './utils'
+import toast from 'react-hot-toast'
 
 function Modal({ title, body, contact, type }: Submission) {
   let [isOpen, setIsOpen] = useState(false)
@@ -20,7 +21,7 @@ function Modal({ title, body, contact, type }: Submission) {
         onClick={openModal}
         className="rounded-md bg-violet-700 px-4 py-2 text-base font-medium text-white hover:bg-violet-950 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700 focus-visible:ring-2 focus-visible:ring-white/75 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-violet-700 mb-8"
       >
-        Submit {SubmissionType[type]}
+        Submit {SubmissionType[type] === 'Issue' ? "problem report" : "new page"}
       </button>
 
       <Transition appear show={isOpen} as={Fragment}>
@@ -51,12 +52,12 @@ function Modal({ title, body, contact, type }: Submission) {
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
-                    className="text-lg font-medium leading-6 text-gray-900"
+                    className="text-lg font-normal leading-6 text-gray-900"
                   >
-                    Confirm: {title}
+                    Confirm submission
                   </Dialog.Title>
-                  <div className="mt-2">
-                    Please note that we cannot guarantee
+                  <div className="mt-2 font-normal">
+                    We look at all submissions and will process them as best we can. We cannot guarantee that all submitted {SubmissionType[type] === 'Issue' ? "problems will be resolved" : "pages will be included"}.
                   </div>
 
                   <div className="mt-4">
@@ -64,8 +65,9 @@ function Modal({ title, body, contact, type }: Submission) {
                       type="button"
                       className="inline-flex justify-center rounded-md border border-transparent bg-green-100 px-4 py-2 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
                       onClick={async () => {
-                        const response = await fetch(
-                          `/.netlify/functions/${SubmissionType[type] ? 'pr' : 'issue'}`,
+                        const tmpFn = async () => { 
+                          const response = await fetch(
+                          `/.netlify/functions/${SubmissionType[type] === 'Issue' ? "issue" : "pr"}`,
                           {
                             method: 'POST',
                             headers: {
@@ -78,21 +80,30 @@ function Modal({ title, body, contact, type }: Submission) {
                             }),
                           }
                         )
-
-                        if (response.ok) {
-                          console.log('Form submitted successfully')
-                        } else {
-                          console.error('Error submitting form')
+                          const jsonBody = await response.json()
+                          console.log(jsonBody)
+                          return jsonBody
                         }
-
-                        closeModal()
+                        
+                        toast.promise(tmpFn(),
+                        {
+                          loading: 'Submitting...',
+                          success: (res) => {
+                            return <>
+                                 <a href={res.html_url} target='_blank' className='underline'>View {SubmissionType[type] === 'Issue' ? "issue" : "submission"}</a>.
+                               </>
+                             }, 
+                             error: <>Could not do this right now. Sorry!</>,
+                            }
+                          );
+                          closeModal()
                       }}
                     >
                       Confirm
                     </button>
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 mx-2"
                       onClick={closeModal}
                     >
                       Cancel
