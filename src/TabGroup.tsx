@@ -88,7 +88,6 @@ function TabGroup() {
 
   return (
     <div className="mx-auto w-full px-2 sm:px-0">
-      <h2 className="my-4 text-2xl">What would you like to contribute?</h2>
       <Tab.Group
         onChange={(index) => {
           setTab(index)

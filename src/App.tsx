@@ -1,13 +1,12 @@
 import TabGroup from './TabGroup'
-import './App.css'
 import { Toaster } from 'react-hot-toast'
 // import toast from 'react-hot-toast'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header mb-8 min-h-32">
-        <h1 className="text-4xl">Easy GitHub Contributor</h1>
+    <div className="App text-black">
+      <header className="my-8">
+        <h1 className="my-4 text-2xl">What would you like to contribute?</h1>
       </header>
       <TabGroup />
       <Toaster

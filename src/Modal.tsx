@@ -1,5 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Submission, SubmissionType } from './utils'
 import toast from 'react-hot-toast'
 
@@ -20,6 +20,7 @@ function Modal({ title, body, contact, type }: Submission) {
         type="button"
         onClick={openModal}
         className="mb-8 rounded-md bg-violet-700 px-4 py-2 text-base font-medium text-white hover:bg-violet-950 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-700 focus-visible:ring-2 focus-visible:ring-white/75 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-violet-700"
+        disabled={!!title && !!body}
       >
         Submit{' '}
         {SubmissionType[type] === 'Issue' ? 'problem report' : 'new page'}
