@@ -173,10 +173,7 @@ ${params.contact ? `The author left their contact info for follow up: ${params.c
   )
 
   return {
-    statusCode: '200',
-    headers: JSON.stringify({
-      'Content-Type': 'application/json',
-    }),
+    statusCode: 200,
     body: JSON.stringify(res.html_url),
   }
 }
