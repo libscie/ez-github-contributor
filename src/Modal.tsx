@@ -83,7 +83,7 @@ function Modal({ title, body, contact, type }: Submission) {
                               body: JSON.stringify({
                                 title: title,
                                 body: body,
-                                contact: contact,
+                                contact: contact, 
                               }),
                             }
                           )
