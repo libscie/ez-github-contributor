@@ -175,6 +175,6 @@ ${params.contact ? `The author left their contact info for follow up: ${params.c
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(res),
+    body: res.html_url,
   }
 }

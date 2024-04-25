@@ -87,12 +87,7 @@ function Modal({ title, body, contact, type }: Submission) {
                               }),
                             }
                           )
-                          console.log("this works")
-                          console.log(response)
-                          console.log(response.json())
-                          const jsonBody = await response.json()
-                          console.log(jsonBody)
-                          return jsonBody
+                          return await response.text()
                         }
 
                         toast.promise(tmpFn(), {
@@ -101,7 +96,7 @@ function Modal({ title, body, contact, type }: Submission) {
                             return (
                               <>
                                 <a
-                                  href={res.html_url}
+                                  href={res}
                                   target="_blank"
                                   rel="noreferrer"
                                   className="underline"
