@@ -87,6 +87,9 @@ function Modal({ title, body, contact, type }: Submission) {
                               }),
                             }
                           )
+                          console.log("this works")
+                          console.log(response)
+                          console.log(response.json())
                           const jsonBody = await response.json()
                           console.log(jsonBody)
                           return jsonBody
