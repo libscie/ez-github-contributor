@@ -3,7 +3,9 @@ const { Octokit } = require('@octokit/rest')
 const { createAppAuth } = require('@octokit/auth-app')
 
 const APP_ID = process.env.APP_ID // Set your GitHub App's ID
-const PRIVATE_KEY = Buffer.from(process.env.PRIVATE_KEY, 'base64').toString('utf8') // Your GitHub App's private key in base64 encoding
+const PRIVATE_KEY = Buffer.from(process.env.PRIVATE_KEY, 'base64').toString(
+  'utf8'
+) // Your GitHub App's private key in base64 encoding
 const INSTALLATION_ID = process.env.INSTALLATION_ID // Installation ID for the repository
 
 async function createIssue(owner, repo, title, body) {
@@ -54,9 +56,9 @@ ${params.contact ? `The author left their contact info for follow up: ${params.c
 
   return {
     statusCode: '200',
-    headers: {
+    headers: JSON.stringify({
       'Content-Type': 'application/json',
-    },
-    body: res.html_url,
+    }),
+    body: JSON.stringify(res.html_url),
   }
 }

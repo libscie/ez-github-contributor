@@ -96,7 +96,7 @@ function Modal({ title, body, contact, type }: Submission) {
                             return (
                               <>
                                 <a
-                                  href={res}
+                                  href={JSON.parse(res)}
                                   target="_blank"
                                   rel="noreferrer"
                                   className="underline"

@@ -14,7 +14,8 @@ body {
   margin: 0;
   background: #f5f3ff;
   /* font-family: 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif; */
-  font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
+  font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans',
+    Arial, sans-serif;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -43,9 +44,12 @@ body {
   text-align: center;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-size: 24px;
-  font-family: 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif;
+  font-family: 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052,
+    serif;
 }
 
 .ltr {
