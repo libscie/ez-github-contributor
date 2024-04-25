@@ -3,7 +3,7 @@ const { createAppAuth } = require('@octokit/auth-app')
 const kebabcase = require('@stdlib/string-kebabcase')
 
 const APP_ID = process.env.APP_ID // Set your GitHub App's ID
-const PRIVATE_KEY = process.env.PRIVATE_KEY // Your GitHub App's private key
+const PRIVATE_KEY = Buffer.from(process.env.PRIVATE_KEY, 'base64').toString('utf8') // Your GitHub App's private key in base64 encoding
 const INSTALLATION_ID = process.env.INSTALLATION_ID // Installation ID for the repository
 
 async function createCommitAndPullRequest(
