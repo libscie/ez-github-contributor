@@ -42,8 +42,8 @@ exports.handler = async function (event, context) {
 
   const params = JSON.parse(event.body)
   const res = await createIssue(
-    'libscie',
-    'ez-github-contributor',
+    'ubvu',
+    'open-handbook',
     params.title,
     `
 ${params.body}

@@ -151,14 +151,14 @@ exports.handler = async function (event, context) {
   const params = JSON.parse(event.body)
   const branch = `ez-github-contributor-${Date.now()}`
   await createBranchIfNotExist(
-    'libscie',
-    'ez-github-contributor',
+    'ubvu',
+    'open-handbook',
     branch,
     'main'
   )
   const res = await createCommitAndPullRequest(
-    'libscie',
-    'ez-github-contributor',
+    'ubvu',
+    'open-handbook',
     params.title,
     branch,
     'main',
